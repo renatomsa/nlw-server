@@ -16,11 +16,11 @@ export async function uploadVideoRoute(app: FastifyInstance) {
         }
     });
 
-    app.post('/videos', async (request, response) => {
+    app.post('/videos', async (request, reply) => {
         const data = await request.file()
 
         if (!data) {
-            return response.status(400).send({
+            return reply.status(400).send({
                 error: 'Missing file input :O',
             });
         }
@@ -28,14 +28,14 @@ export async function uploadVideoRoute(app: FastifyInstance) {
         const extension = path.extname(data.filename);
 
         if (extension !== '.mp3') {
-            return response.status(400).send({
+            return reply.status(400).send({
                 error: 'Invalid file type, please upload an mp3 file',
             });
         }
 
         const fileBaseName = path.basename(data.filename, extension);
         const fileNameUpload = `${fileBaseName}-${randomUUID}${extension}`;
-        const uploadDestination = path.resolve(__dirname, '../../tmp', fileNameUpload)
+        const uploadDestination = path.resolve(__dirname, '/home/renato/Nlw-AI/nlw-server/src/tmp', fileNameUpload)
 
         await pump(data.file, fs.createWriteStream(uploadDestination));
 
