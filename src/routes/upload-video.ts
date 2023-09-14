@@ -16,8 +16,8 @@ export async function uploadVideoRoute(app: FastifyInstance) {
         }
     });
 
-    app.post('/videos', async (request, reply) => {
-        const data = await request.file()
+    app.post('/videos', async (req, reply) => {
+        const data = await req.file()
 
         if (!data) {
             return reply.status(400).send({
@@ -35,7 +35,7 @@ export async function uploadVideoRoute(app: FastifyInstance) {
 
         const fileBaseName = path.basename(data.filename, extension);
         const fileNameUpload = `${fileBaseName}-${randomUUID}${extension}`;
-        const uploadDestination = path.resolve(__dirname, '/home/renato/Nlw-AI/nlw-server/src/tmp', fileNameUpload)
+        const uploadDestination = path.resolve(__dirname, '../../tmp', fileNameUpload)
 
         await pump(data.file, fs.createWriteStream(uploadDestination));
 
