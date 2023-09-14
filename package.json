@@ -1,0 +1,23 @@
+{
+  "name": "nlw-server",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.0",
+    "bun-types": "latest",
+    "prisma": "^5.3.0",
+    "tsx": "^3.12.10",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@fastify/multipart": "^7.7.3",
+    "@prisma/client": "5.3.0",
+    "fastify": "^4.23.1"
+  }
+}
